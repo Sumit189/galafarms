@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-header" style="background: #f1efe3">
+    <div class="card-body rounded">
+      <center>
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  data-interval="1500">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag "banner.jpg", class:"d-block image-banner"%>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag "banner-2.jpg", class:"d-block image-banner"%>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag "banner-3.jpg", class:"d-block image-banner"%>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      </center>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <div class="sub-header">
+        <h2 class="title"><%= params[:type].nil? ? "Products" : params[:type].to_s.pluralize(@products.count) %><span><%= @products.count%> <%="result".pluralize(@products.count) %></span></h2>
+<!--        <div class="close-btn"><i class="fa fa-close"></i></div>-->
+      </div>
+      <div class="thumb-wrapper">
+      <% @products.each do |p| %>
+        <div class="thumb-unit">
+          <%= link_to "/show_product?id=#{p.id}" do %>
+          <div class="heading"><span>₹<%= p.price %></span></div>
+          <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);"></div>
+          <div class="info">
+            <p style="font-size: 22px"><%= p.product_name %></p><span class="icon"><i class="fa fa-shopping-cart"></i></span>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

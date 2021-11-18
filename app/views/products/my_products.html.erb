@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+<div class="card my_p_wrapper">
+  <div class="card-header">
+    <h2 class="card-title d-flex justify-content-between mb-2">
+      <span>All Products</span>
+      <%= link_to 'Add Product', new_product_path(@products), class: 'btn btn-primary'  %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Product Type</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th colspan="3"  style="text-align:center">Actions</th>
+
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @products.each do |p| %>
+        <tr>
+          <td><%= p.product_name%></td>
+          <td><%= p.product_type %></td>
+          <td><%= p.product_brand %></td>
+          <td><%= p.price %></td>
+          <td><%= p.description %></td>
+          <td><%= link_to ('<i class="fa fa-eye"></i>').html_safe, p%></td>
+          <td><%= link_to ('<i class="fa fa-edit"></i>').html_safe, edit_product_path(p) %></td>
+          <td><%= link_to ('<i class="fa fa-trash"></i>').html_safe, p, method: :delete, data: { confirm: 'Are you sure, you want to delete this employee?' } %></td>
+        </tr>
+
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <p style="font-size: 18px">Total Products: <b><%= @products.count  %></b></p>
+  </div>
+</div>
+</div>
+
+
+
+

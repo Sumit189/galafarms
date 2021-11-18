@@ -1,0 +1,53 @@
+<center>
+  <div class ="card wrapper">
+    <div class="card-header">
+      <h2 class="card-title d-flex justify-content-between mb-2">
+        <span>Log In</span>
+      </h2>
+    </div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="card-body">
+        <div class="field" style="width: 60%">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">    <%= f.label :email %></span>
+            </div>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control  mx-sm-3' %>
+          </div>
+        </div>
+
+        <div class="field" style="width: 60%">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">  <%= f.label :password %></span>
+            </div>
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control  mx-sm-3' %>
+          </div>
+        </div>
+
+        <div class="field" style="width: 60%">
+          <div class="input-group mb-3">
+            <% if devise_mapping.rememberable? %>
+              <div class="input-group-text">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+
+      </div>
+      <div class ="card-footer">
+        <div class="actions">
+          <%= f.submit "Log In", class:"btn btn-success", style:"width: 40%" %>
+          <br>
+          <br>
+            <%= link_to "Forgot your password?", new_password_path(resource_name), class: "btn btn-danger text-white", style:"width: 70%, float:left" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success text-white",  style:"width: 20%,float:right" %>
+        </div>
+      </div>
+    <%end %>
+
+  </div>
+</center>

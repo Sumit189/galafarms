@@ -1,0 +1,40 @@
+<div class="card wrapper">
+  <div class="card-header">
+    <h2 class="card-title d-flex justify-content-between mb-2">
+      <span>Change your password</span>
+    </h2>
+  </div>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
+    <div class="card-body">
+      <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">  <%= f.label :password %></span>
+          </div>
+          <%= f.password_field :password, autocomplete: "new-password", class:'form-control  mx-sm-3' %>
+          <small id="passwordHelpInline" class="text-muted">
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+          </small>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"> <%= f.label :password_confirmation %></span>
+          </div>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control  mx-sm-3' %>
+        </div>
+      </div>
+    </div>
+    <div class ="card-footer">
+      <div class="actions">
+        <%= f.submit "Change my password", class:"btn btn-warning", style:"width: 100%" %>
+      </div>
+    </div>
+  <% end %>
+</div>

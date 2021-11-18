@@ -1,0 +1,74 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mb-4">
+    <label for="formGroupExampleInput" style="font-size: 22px"><%= form.label :product_name %></label>
+    <%= form.text_field :product_name, class: 'form-control',id:"formGroupExampleInput"%>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="formGroupExampleInput" style="font-size: 22px"><%= form.label :product_type %></label>
+    <%= form.text_field :product_type, class: 'form-control',id:"formGroupExampleInput"%>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="formGroupExampleInput" style="font-size: 22px"><%= form.label :brand %></label>
+    <%= form.text_field :product_brand, class: 'form-control',id:"formGroupExampleInput"%>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="formGroupExampleInput" style="font-size: 22px"><%= form.label :price %></label>
+    <%= form.number_field :price, class: 'form-control',id:"formGroupExampleInput"%>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="formGroupExampleInput2" style="font-size: 22px"><%= form.label :description %></label>
+    <%= form.text_area :description, :rows => 10 , class: 'form-control' ,id:"formGroupExampleInput", placeholder:"Content" %>
+  </div>
+
+
+  <% if product.image.attached? %>
+    <div class="field">
+      <%= image_tag product.image, style:"width:200px" %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">   <%= form.label :image %></span>
+      </div>
+      <%= form.file_field :image, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">   <%= form.label :category %></span>
+      </div>
+      <%= form.text_field :category, list: 'categories' ,class: 'form-control' %>
+    </div>
+  </div>
+  <datalist id="categories">
+    <% category.each do |categories| %>
+      <option value="<%= categories %>"></option>
+    <% end %>
+  </datalist>
+
+  <div class="actions">
+    <%= form.submit  class:"btn btn-success"%>
+  </div>
+<% end %>
+
+

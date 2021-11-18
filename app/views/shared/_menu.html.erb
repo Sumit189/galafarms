@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+<!--    <a class="navbar-brand" href="/"><%#= image_tag "blog_logo.png", height: 40 %></a>-->
+        <a class="navbar-brand" href="/">GALAFARMS</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/" id="home">Home</a>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <a class="nav-link" href="/my_products"  id="mposts">Products</a>
+          </li>
+        <% end %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% Product.select(:product_type).map(&:product_type).uniq.each do |c| %>
+              <li>
+                <%= link_to c.upcase_first, "/products?type=#{c}", class: "dropdown-item" %>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/abouts/info"  id="about">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home/contactus"  id="contact">Contact us</a>
+        </li>
+
+      </ul>
+      <div class="d-flex">
+        <%= link_to "<i class='fa fa-shopping-cart fa-lg' aria-hidden='true'></i>".html_safe, "/users/sign_in", class:"btn btn-outline-dark", style: "margin-right: 10px" %>
+        <% if user_signed_in? == false %>
+          <%= link_to "Login", "/users/sign_in", class:"btn btn-outline-dark", style: "margin-right: 10px" %>
+          <%= link_to "Signup", "/users/sign_up", class:"btn btn-outline-dark", style: "margin-right: 10px" %>
+        <% else %>
+          <%= link_to "Logout", destroy_user_session_path, :method => :delete, class:"btn btn-outline-danger", style: "margin-right: 10px" %>
+        <%end %>
+      </div>
+    </div>
+  </div>
+</nav>

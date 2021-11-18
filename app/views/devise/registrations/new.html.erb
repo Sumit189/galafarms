@@ -1,0 +1,61 @@
+<div class="card wrapper">
+  <div class="card-header">
+    <h2 class="card-title d-flex justify-content-between mb-2">
+      <span>Sign up</span>
+    </h2>
+  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="card-body">
+      <div class="field">
+        <div class="input-group mb-4">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"> <%= f.label :name %></span>
+          </div>
+          <%= f.text_field :name, class: 'form-control', autofocus: true %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="input-group mb-4">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"> <%= f.label :email %></span>
+          </div>
+          <%= f.text_field :email, class: 'form-control', autocomplete: "email" %>
+        </div>
+      </div>
+
+
+      <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">  <%= f.label :password %></span>
+          </div>
+          <%= f.password_field :password, autocomplete: "new-password", class:'form-control  mx-sm-3' %>
+          <small id="passwordHelpInline" class="text-muted">
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+          </small>
+        </div>
+      </div>
+
+
+      <div class="field">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"> <%= f.label :password_confirmation %></span>
+          </div>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control  mx-sm-3' %>
+        </div>
+      </div>
+    </div>
+    <div class ="card-footer">
+      <div class="actions">
+        <%= f.submit "Sign up", class:"btn btn-success", style:"width: 100%" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+

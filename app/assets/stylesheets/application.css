@@ -1,0 +1,267 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+ background-color: #f1efe3;
+}
+
+
+.image-banner{
+    border-radius: 0.4em;
+    width: 40%;
+}
+
+.wrapper{
+    margin: 25px auto;
+    width: 50%;
+}
+
+.my_p_wrapper{
+    margin: 25px auto;
+    width: 80%;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.sub-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.sub-header .close-btn {
+    font-size: 30px;
+    color: #c8ad78;
+    cursor: pointer;
+}
+.sub-header .title {
+    line-height: 1;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+.sub-header .title span {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: lowercase;
+    color: #c8ad78;
+}
+
+.thumb-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.thumb-unit {
+    width: 24%;
+    margin: 0 0.5% 20px 0.5%;
+    padding: 15px 20px;
+    border: 1px solid #c8ad78;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease-in-out 300ms;
+}
+.thumb-unit.is-active {
+    border: none;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+    z-index: 1000;
+    background: white;
+    animation: tada ease-in-out 1000ms forwards;
+}
+.thumb-unit:hover {
+    border: none;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+    z-index: 1000;
+    background: white;
+}
+
+.thumb-unit .heading {
+    display: flex;
+    justify-content: space-between;
+}
+.thumb-unit .heading span {
+    font-size: 20px;
+    font-weight: 700;
+}
+.thumb-unit .box {
+    width: 100%;
+    margin: 10px 0px;
+    transition: all ease-in-out 300ms;
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.thumb-unit .box:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.thumb-unit .info {
+    display: flex;
+    justify-content: space-between;
+    line-height: 1.2;
+    font-size: 16px;
+    font-weight: 700;
+}
+.thumb-unit .info .icon {
+    font-size: 20px;
+    color: #c8ad78;
+}
+
+@media (max-width: 1200px) {
+    .thumb-unit {
+        width: 31.33%;
+        margin: 0px 0.5% 20px 0.5%;
+    }
+}
+@media (max-width: 640px) {
+    .thumb-unit {
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .navigation {
+        display: none;
+    }
+}
+@keyframes tada {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    10%, 20% {
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.qty-input {
+    color: #000;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.qty-input .product-qty,
+.qty-input .qty-count {
+    background: transparent;
+    color: inherit;
+    font-weight: bold;
+    font-size: inherit;
+    border: none;
+    display: inline-block;
+    min-width: 0;
+}
+.qty-input .product-qty:focus,
+.qty-input .qty-count:focus {
+    outline: none;
+}
+.qty-input .product-qty {
+    min-width: 0;
+    display: inline-block;
+    text-align: center;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+}
+.qty-input .product-qty::-webkit-outer-spin-button, .qty-input .product-qty::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+.qty-input .qty-count {
+    padding: 0;
+    cursor: pointer;
+    width: 2.5rem;
+    font-size: 1.25em;
+    text-indent: -100px;
+    overflow: hidden;
+    position: relative;
+}
+.qty-input .qty-count:before, .qty-input .qty-count:after {
+    content: "";
+    height: 2px;
+    width: 10px;
+    position: absolute;
+    display: block;
+    background: #000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.qty-input .qty-count--minus {
+    border-right: 1px solid #e2e2e2;
+}
+.qty-input .qty-count--add {
+    border-left: 1px solid #e2e2e2;
+}
+.qty-input .qty-count--add:after {
+    transform: rotate(90deg);
+}
+.qty-input .qty-count:disabled {
+    color: #ccc;
+    background: #f2f2f2;
+    cursor: not-allowed;
+    border-color: transparent;
+}
+.qty-input .qty-count:disabled:before, .qty-input .qty-count:disabled:after {
+    background: #ccc;
+}
+
+.qty-input {
+    border-radius: 4px;
+    box-shadow: 0 1em 2em -0.9em rgba(0, 0, 0, 0.7);
+}
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        width: 100%;
+    }
+    .image-banner{
+        width: 100%;
+    }
+    .my_p_wrapper{
+        margin: 0 auto;
+        width: 100%;
+    }
+    .container{
+        width: 100%;
+    }
+}
