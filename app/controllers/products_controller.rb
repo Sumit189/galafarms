@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    if params[:type].nil? == false
+    if params[:type].nil?
       @products = Product.where(product_type: params[:type])
     else
       @products = Product.all

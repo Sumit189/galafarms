@@ -21,7 +21,7 @@ body {
 
 .image-banner{
     border-radius: 0.4em;
-    width: 40%;
+    width: 50%;
 }
 
 .wrapper{
@@ -265,3 +265,5 @@ a {
         width: 100%;
     }
 }
+
+
