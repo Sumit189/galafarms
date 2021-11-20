@@ -1,8 +1,7 @@
 class CartsController < ApplicationController
+  before_action :authenticate_user!, only: [:checkout, :pay]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   before_action :set_cart, only: %i[ show edit update destroy ]
-  before_action :autheticate_user!, only: %i[ checkout, pay ]
-
   # GET /carts or /carts.json
   def index
     @carts = Cart.all
@@ -34,7 +33,7 @@ class CartsController < ApplicationController
   end
 
   def pay
-    @cart = Cart.find(user_id: current_user.id)
+    @cart = Cart.find_by(user_id: current_user.id)
     @line_item = LineItem.where(cart_id: @cart.id)
     @line_item.each do |line_item|
       @product = Product.find(line_item.product_id)
