@@ -18,6 +18,20 @@
   </head>
   <%= render "shared/menu" %>
   <body>
+  <center>
+    <% if alert != nil  %>
+      <div class="alert alert-danger alert-dismissible wrapper" role="alert">
+        <%= alert %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+    <% if notice != nil  %>
+      <div class="alert alert-success alert-dismissible wrapper" role="alert">
+        <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <%end %>
+  </center>
     <%= yield %>
     <footer class="footer mt-auto py-3 bg-light card-footer">
       <div class="container">

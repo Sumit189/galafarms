@@ -1,0 +1,17 @@
+<div class="border w-full rounded mt-2 flex p-2 justify-between items-center flex-wrap">
+  <%= image_tag line_item.product.image, class:"cart_prod_img" %>
+  <div class="w-2/3">
+    <h3 class="text-lg font-medium"><%= line_item.product.product_name %></h3>
+    <p class="text-gray-600 text-xs"><b><%= line_item.product.product_type %></b></p>
+  </div>
+  <div>
+    <h4 class="text-3xl font-medium"><sup class="text-lg text-purple-800">₹</sup> <%= line_item.total_price %></h4>
+<!--    <h5 class="text-sm font-bold text-purple-800">60% OFF</h5>-->
+  </div>
+  <div class="w-full flex justify-between mt-2">
+    <td><%= link_to 'DELETE', line_item, method: :delete, data: { confirm: 'Are you sure?' },  class:"text-red-700 hover:bg-red-100 px-2" %></td>
+    <td>
+      <span class="ml-4 text-sm border border-purple-200 text-white p-1 rounded leading-tight" style="background: #5575aa">QTY:   <%= line_item.quantity %></span>
+    </td>
+  </div>
+</div>

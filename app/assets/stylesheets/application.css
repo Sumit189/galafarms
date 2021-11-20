@@ -18,7 +18,9 @@ body {
  background-color: #f1efe3;
 }
 
-
+.cart_prod_img{
+    width: 10%;
+}
 .image-banner{
     border-radius: 0.4em;
     width: 50%;
@@ -262,6 +264,9 @@ a {
         width: 100%;
     }
     .container{
+        width: 100%;
+    }
+    .cart_prod_img{
         width: 100%;
     }
 }

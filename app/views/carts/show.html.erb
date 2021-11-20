@@ -1,0 +1,38 @@
+<!--<p id="notice"><%#= notice %></p>-->
+
+<%#= render(@cart.line_items) %>
+<!--<%#= link_to 'Edit', edit_cart_path(@cart) %> |-->
+<%#= link_to 'Back', carts_path %>
+  <div class="card" style="background: #f1efe3">
+    <div class="card-body">
+  <div class="container mx-auto p-10 max-w-screen-lg ">
+    <div class="bg-white rounded shadow p-8">
+      <div>
+        <h3 class="text-xl mt-4 font-bold d-flex justify-content-between mb-2">Order Summary
+          <span>
+          <%= link_to "Buy Grocery Items", root_path, class: 'btn btn-danger' %>
+        </span>
+        </h3>
+        <!--     BOX     -->
+        <% if @cart.line_items.empty? %>
+          <p>No products in your cart...</p>
+        <%end %>
+        <%= render @cart.line_items %>
+
+        <div class="card-footer">
+          <% if @cart.line_items.count >0 %>
+          <h4 class="text-right"><b>Total Amount: </b>₹<%= @cart.total_price %></h4>
+          <% end %>
+        </div>
+        <br>
+      </div>
+      <center>
+        <% unless @cart.line_items.empty? %>
+<!--          <button >PROCEED TO CHECKOUT SCREEN</button>-->
+        <%= link_to "PROCEED TO ADDRESS", "/checkout", class:"px-3 py-3 text-white w-half mt-3 rounded shadow font-bold hover:bg-purple-900", style:"background: #5575aa" %>
+        <%end %>
+          </center>
+    </div>
+  </div>
+</div>
+</div>

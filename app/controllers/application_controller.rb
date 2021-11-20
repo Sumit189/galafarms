@@ -10,4 +10,74 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
   end
 
+  def after_sign_in_path_for(resource_or_scope)
+      if session[:cart_id]
+        cart = Cart.find_by(id: session[:cart_id])
+        if Cart.exists?(:user_id => current_user.id)
+          user_cart = Cart.find_by_user_id(current_user.id)
+          line_item = LineItem.where(cart_id: cart.id)
+          line_item.update(cart_id: user_cart.id)
+          cart.destroy
+        else
+          unless cart.nil?
+            cart.update(:user_id => current_user.id)
+          end
+        end
+          session[:cart_id] = nil
+      end
+      super
+  end
+
+  def current_cart
+    if user_signed_in?
+      if current_user.cart.present?
+        cart = current_user.cart
+      else
+        cart = Cart.create(user_id: current_user.id)
+      end
+      session[:cart_id] = cart.id
+      cart
+    else
+      if session[:cart_id]
+        begin
+          cart = Cart.find(session[:cart_id])
+        rescue ActiveRecord::RecordNotFound
+          cart = Cart.create
+        end
+      else
+        cart = Cart.create
+      end
+      session[:cart_id] = cart.id
+      cart
+    end
+  end
+
+  # def current_cart
+  #   if user_signed_in?
+  #     if current_user.cart.present?
+  #       cart = current_user.cart
+  #     else
+  #       cart = Cart.create(user_id: current_user.id)
+  #     end
+  #     session[:cart_id] = cart.id
+  #     cart
+  #   else
+  #     begin
+  #       cart = Cart.find(session[:cart_id])
+  #     rescue ActiveRecord::RecordNotFound
+  #       cart = Cart.create(user_id: nil)
+  #     end
+  #     session[:cart_id] = cart.id
+  #     cart
+  #   end
+  # end
+  #   def current_cart
+  #     begin
+  #       Cart.find(session[:cart_id])
+  #     rescue ActiveRecord::RecordNotFound
+  #       cart = Cart.create
+  #       session[:cart_id] = cart.id
+  #       cart
+  #     end
+  #   end
 end

@@ -1,0 +1,7 @@
+<h1>PURCHASED SUCCESSFUL</h1>
+<h2>Items</h2>
+<ul>
+<% @cart.line_items.each do |x| %>
+  <li><%= x.product.product_name %></li>
+  <% end %>
+</ul>

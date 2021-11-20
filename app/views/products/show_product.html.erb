@@ -1,6 +1,5 @@
 <div class="card">
   <div class="card-header">
-
   </div>
   <div class="card-body rounded">
     <div class="container">
@@ -20,17 +19,19 @@
         <div class="column-xs-12 column-md-5">
           <h1><%= @product.product_name %></h1>
           <h2>₹<%= @product.price %></h2>
+          <h6>Stock: <%= @product.stock %></h6>
           <div class="description">
             <p><%= @product.description %></p>
           </div>
+          <%= form_tag line_items_path(product_id: @product) do %>
           <div class="qty-input">
             <span>Quantity: </span>
-            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-            <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1">
-            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="qty-count qty-count--add" data-action="add" type="button">+</button>
-          </div>
-          <br>
-          <button class="add-to-cart">Add To Cart</button>
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+              <%= number_field_tag  'quantity', '1' , class:"product-qty", type:"number", name:"qty", min:"1", max: "#{@product.stock}" %>
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="qty-count qty-count--add" data-action="add" type="button">+</button>
+              </div>
+              <%= submit_tag 'Add To Cart', class:"add-to-cart" %>
+            <% end %>
         </div>
       </div>
     </div>

@@ -31,14 +31,32 @@
       <div class="thumb-wrapper">
       <% @products.each do |p| %>
         <div class="thumb-unit">
+          <% if p.stock > 0 %>
           <%= link_to "/show_product?id=#{p.id}" do %>
-          <div class="heading"><span>₹<%= p.price %></span></div>
+            <div class="heading"><span>₹<%= p.price %></span><span><%= (p.stock > 0) ? "<b>Stock: #{p.stock}</b>".html_safe : "<p style='color:red'>Out of stock</p>".html_safe %></span></div>
+            <% if p.stock > 0 %>
           <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);"></div>
+              <% else %>
+              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);  filter: grayscale(100%); "></div>
+              <% end %>
           <div class="info">
             <p style="font-size: 22px"><%= p.product_name %></p><span class="icon"><i class="fa fa-shopping-cart"></i></span>
           </div>
           <% end %>
+          <% else %>
+            <div class="heading"><span>₹<%= p.price %></span><span><%= (p.stock > 0) ? "<b>Stock: #{p.stock}</b>".html_safe : "<p style='color:red'>Out of stock</p>".html_safe %></span></div>
+            <% if p.stock > 0 %>
+              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);"></div>
+            <% else %>
+              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);  filter: grayscale(100%); "></div>
+            <% end %>
+            <div class="info">
+              <p style="font-size: 22px"><%= p.product_name %></p><span class="icon"><i class="fa fa-shopping-cart"></i></span>
+            </div>
+        <% end %>
+
         </div>
+
         <% end %>
       </div>
     </div>
