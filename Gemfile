@@ -13,6 +13,9 @@ gem 'puma', '~> 5.0'
 gem 'devise'
 # Will paginate
 gem 'will_paginate'
+gem 'will_paginate-bootstrap4'
+# ActiveMerchant
+gem 'activemerchant'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

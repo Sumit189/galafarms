@@ -37,7 +37,7 @@
 
       </ul>
       <div class="d-flex">
-        <%= link_to "<i class='fa fa-shopping-cart fa-lg' aria-hidden='true'></i>".html_safe, "/carts/#{session[:cart_id]}", class:"btn btn-outline-dark", style: "margin-right: 10px" %>
+        <%= link_to Cart.exists?(session[:cart_id]) ? "<i class='fa fa-shopping-cart fa-lg' aria-hidden='true'></i> ₹#{Cart.find(session[:cart_id]).total_price}".html_safe : "<i class='fa fa-shopping-cart fa-lg' aria-hidden='true'></i>".html_safe, "/carts/#{session[:cart_id]}", class:"btn btn-outline-dark", style: "margin-right: 10px" %>
         <% if user_signed_in? == false %>
           <%= link_to "Login", "/users/sign_in", class:"btn btn-outline-dark", style: "margin-right: 10px" %>
           <%= link_to "Signup", "/users/sign_up", class:"btn btn-outline-dark", style: "margin-right: 10px" %>

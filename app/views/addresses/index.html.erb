@@ -1,0 +1,83 @@
+<%= form_for(:info ,:url => {:action => :order_info}) do |form| %>
+  <div class="row" style="margin: 25px auto">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body" style="border-radius: 1.4em">
+          <h2 class="text-xl mt-4 font-bold d-flex justify-content-between mb-2">Select Address
+            <span>
+      <%= link_to 'New Address', new_address_path, class: 'btn text-white', style: 'background: #5575aa' %>
+    </span>
+          </h2>
+          <% @addresses.each do |address| %>
+            <label class="card">
+              <%= form.radio_button :selected_address, address.id, class:"radio", required: 'required' %>
+              <span class="user-details">
+      <span class="user-type"><%= address.first_name %> <%=address.last_name %></span>
+      <span><%= address.address1%></span>
+                <% unless address.address2.nil? %>
+        <span><%= address.address2%></span>
+        <% end %>
+                <span><%=address.city %>, <%= address.state%></span>
+      <span><%=address.country %></span>
+        <span> <%= link_to ('<i class="fa fa-trash fa-lg my-float"></i>').html_safe, address ,method: :delete, data: { confirm: "Are you sure?" }, class:"float" %></span>
+    </span>
+            </label>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex">
+            <div class="mx-auto">
+              <%= will_paginate @addresses, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card card-bg">
+        <div class="card-body">
+          <h3 class="text-xl mt-4 font-bold d-flex justify-content-between mb-2">Payment Details<span> <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-amex"></i> </span> </h3>
+          <div class="form-group"> <label for="username">
+            <h6>Card Owner</h6>
+          </label>
+            <%= form.text_field :username, class:"form-control", placeholder:"Card Owner Name" %>
+          </div>
+          <div class="form-group">
+            <label for="cardNumber">
+              <h6>Card number</h6>
+            </label>
+            <div class="input-group">
+              <%= form.text_field :cardNumber, class:"form-control", placeholder:"Valid card number" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="form-group"> <label><span class="hidden-xs">
+                                                    <h6>Expiration Date</h6>
+                                                </span></label>
+                <div class="input-group">
+                  <%= form.month_field :expiry, placeholder:"MM YYYY", class:"form-control"%>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+              </label> <input type="text" required class="form-control">
+              </div>
+          </div>
+            <div class="col-sm-7">
+              <h5>Total Amount: <b>₹<%= @total_price %></b></h5>
+            </div>
+          </div>
+          <center>
+            <div class="card-footer">
+              <%= form.submit "Confirm Order",  class:"subscribe btn btn-block shadow-sm text-white", style:"background: #5575aa; width:100%" %>
+            </div>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end %>

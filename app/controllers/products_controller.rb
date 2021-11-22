@@ -4,9 +4,9 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     if params[:type].nil?
-      @products = Product.all
+      @products = Product.all.paginate(page: params[:page], per_page: 8)
     else
-      @products = Product.where(product_type: params[:type])
+      @products = Product.where(product_type: params[:type]).paginate(page: params[:page], per_page: 8)
     end
   end
 

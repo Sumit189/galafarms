@@ -1,0 +1,145 @@
+ <div class="form-row">
+   <%= form_with(model: address) do |form| %>
+     <% if address.errors.any? %>
+       <div id="error_explanation">
+         <h2><%= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>
+
+         <ul>
+           <% address.errors.each do |error| %>
+             <li><%= error.full_message %></li>
+           <% end %>
+         </ul>
+       </div>
+     <% end %>
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :first_name %></span>
+         </div>
+         <%= form.text_field :first_name, class:'form-control', autocomplete:"first name" %>
+       </div>
+     </div>
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :last_name %></span>
+         </div>
+         <%= form.text_field :last_name, class:'form-control', autocomplete:"last name" %>
+       </div>
+     </div>
+
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :address1 %></span>
+         </div>
+         <%= form.text_field :address1, class:'form-control', placeholder:"1234 Main Street.." %>
+       </div>
+     </div>
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :address_2 %></span>
+         </div>
+         <%= form.text_field :address2, class:'form-control mx-sm-3', placeholder:"Apartment, studio, or floor" %>
+         <small id="addressHelpInline" class="text-muted">
+         <p>Optional</p>
+         </small>
+       </div>
+     </div>
+
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :city %></span>
+         </div>
+         <%= form.text_field :city, class:'form-control' %>
+       </div>
+     </div>
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :state %></span>
+         </div>
+         <%= form.text_field :state, class:'form-control' %>
+       </div>
+     </div>
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :country %></span>
+         </div>
+         <%= form.text_field :country, class:'form-control' %>
+       </div>
+     </div>
+
+     <div class="field">
+       <div class="input-group mb-4">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="inputGroup-sizing-default"> <%= form.label :zip %></span>
+         </div>
+         <%= form.number_field :zip, class:'form-control' %>
+       </div>
+     </div>
+
+     <div class="card-footer">
+       <center>
+         <%=  form.submit "Add Address", class:'btn btn-success' , style:"width:100%" %>
+       </center>
+     </div>
+
+   <% end %>
+ </div>
+
+
+<!--------------------->
+
+
+
+
+<!--  <div class="field">-->
+    <%#= form.label :address1 %>
+    <%#= form.text_field :address1 %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :address2 %>
+    <%#= form.text_field :address2 %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :city %>
+    <%#= form.text_field :city %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :state %>
+    <%#= form.text_field :state %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :country %>
+    <%#= form.text_field :country %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :zip %>
+    <%#= form.text_field :zip %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= form.label :user_id %>
+    <%#= form.text_field :user_id %>
+<!--  </div>-->
+
+<!--  <div class="actions">-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>

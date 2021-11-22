@@ -61,4 +61,13 @@
       </div>
     </div>
   </div>
+  <% if @products.count>8 %>
+  <div class="card-footer">
+    <div class="d-flex">
+      <div class="mx-auto">
+        <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      </div>
+    </div>
+  </div>
+  <%end %>
 </div>
