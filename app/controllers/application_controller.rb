@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     if user_signed_in?
-      if current_user.carts.present?
+      if current_user.carts.present? and current_user.carts.last.purchased == false
         cart = current_user.carts.last
       else
         cart = Cart.create(user_id: current_user.id)

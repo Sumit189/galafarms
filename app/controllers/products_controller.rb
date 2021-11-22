@@ -1,6 +1,10 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
+  def search
+    keyword = "%"+params[:search].to_s+"%"
+    @products = Product.find_by_sql(["SELECT * FROM PRODUCTS WHERE PRODUCT_NAME LIKE ? OR PRODUCT_BRAND LIKE ?", keyword, keyword])
+  end
   # GET /products or /products.json
   def index
     if params[:type].nil?
@@ -14,6 +18,10 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def orders
+    @orders = Order.all
+  end
+
   def show_product
     @product = Product.find(params[:id])
   end
@@ -21,11 +29,7 @@ class ProductsController < ApplicationController
   # GET /products/1 or /products/1.json
   def show
   end
-  def search
-    byebug
-    # keyword = "%" + params[:search].to_s + "%"
-    # @products = Product.find_by_sql("SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE ? OR PRODUCT_BRAND LIKE ?", keyword, keyword)
-  end
+
 
   # GET /products/new
   def new
@@ -35,6 +39,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
   end
+
 
   # POST /products or /products.json
   def create

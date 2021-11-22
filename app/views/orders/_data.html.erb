@@ -1,0 +1,43 @@
+<div class="card-body">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Product Type</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Customer</th>
+        <th>Address</th>
+        <th>Transaction Id</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @orders.each do |o| %>
+        <%  LineItem.where(cart_id: o.cart_id).each do |p| %>
+          <tr>
+            <td><%= Product.find(p.product_id).product_name  %></td>
+            <td><%= Product.find(p.product_id).product_type  %></td>
+            <td><%= Product.find(p.product_id).product_brand  %></td>
+            <td><%= Product.find(p.product_id).price  %></td>
+            <td><%= p.quantity  %></td>
+            <td><%= o.customer_id  %></td>
+            <td><%= Address.find(o.address_id).address1  %></td>
+            <td><%= o.transaction_id  %></td>
+            <td><%= Cart.find(o.cart_id).purchased == true ? "Paid" : "NA" %></td>
+            <td><%= o.created_at.to_date %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+
+
+

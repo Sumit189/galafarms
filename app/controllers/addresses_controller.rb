@@ -57,10 +57,16 @@ class AddressesController < ApplicationController
 
         if response.success?
           puts "Successfully charged $#{sprintf("%.2f", amount / 100)} to the credit card #{credit_card.display_number}"
-          puts response.inspect
-          byebug
+
+          OrderMailer.with(user: current_user, address: @address_id, amount: amount, current_user: current_user).new_order.deliver_now
+
           Order.create(:customer_id => current_user.id, :cart_id => current_user.carts.last.id, :amount => amount, :address_id => @address_id, :transaction_id => response.params["transid"])
-          # redirect_to root_path, notice: "Order Successful"
+          current_user.carts.last.update(:purchased => true)
+            li = LineItem.where(:cart_id =>  current_user.carts.last.id)
+            li.each do |l|
+              Product.find(l.product_id).update(:stock => Product.find(l.product_id).stock - l.quantity)
+            end
+          redirect_to root_path, notice: "Order Successful"
         else
           raise StandardError, response.message
           render addresses_path, alert: "Provided details are invalid..."

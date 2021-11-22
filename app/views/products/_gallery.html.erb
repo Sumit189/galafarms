@@ -2,18 +2,18 @@
   <div class="container">
     <div class="sub-header">
       <h2 class="title"><%= params[:type].nil? ? "Products" : params[:type].to_s.pluralize(@products.count) %><span><%= @products.count%> <%="result".pluralize(@products.count) %></span></h2>
-      <form class="form-inline">
-        <%= form_for(:search ,:url => {:action => :search}) do |form| %>
+      <div class="form-inline">
+        <%= form_with url: "search", action: :search ,method: :get do |sform| %>
         <div class="row">
           <div class="col-sm-7">
-            <%= form.text_field :keyword,class:"form-control mr-sm-1",placeholder:"Search"  %>
+            <%= sform.text_field :search,class:"form-control mr-sm-1",placeholder:"Search"  %>
           </div>
           <div class="col-sm-2">
-            <%= form.submit "Search", class:"btn btn-outline-success my-1 my-sm-0" %>
+            <%= sform.submit "Search", class:"btn btn-outline-success my-1 my-sm-0",:name => nil %>
         </div>
           <%end %>
         </div>
-      </form>
+      </div>
 
 
     </div>

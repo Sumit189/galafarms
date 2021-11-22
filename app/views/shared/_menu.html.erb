@@ -12,7 +12,7 @@
         </li>
         <% if user_signed_in? %>
           <li class="nav-item">
-            <a class="nav-link" href="/my_products"  id="mposts">Products</a>
+            <a class="nav-link" href="/my_products"  id="mposts">My Products</a>
           </li>
         <% end %>
         <li class="nav-item dropdown">
@@ -28,6 +28,15 @@
             <% end %>
           </ul>
         </li>
+        <% if user_signed_in?  %>
+        <li class="nav-item">
+          <a class="nav-link" href="/orders"  id="orders">All Orders</a>
+        </li>
+          <%else %>
+          <li class="nav-item">
+            <a class="nav-link" href="/my_orders"  id="orders">My Orders</a>
+          </li>
+          <%end %>
         <li class="nav-item">
           <a class="nav-link" href="/abouts/info"  id="about">About us</a>
         </li>
