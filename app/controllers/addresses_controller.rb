@@ -1,5 +1,8 @@
 class AddressesController < ApplicationController
+  require 'active_merchant'
+  require "active_merchant/billing/rails"
   before_action :set_address, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /addresses or /addresses.json
   def index
@@ -22,13 +25,52 @@ class AddressesController < ApplicationController
 
   def order_info
     if request.post?
-      byebug
+      @address_id = params[:info][:selected_address]
+      @month_year = params[:info][:expiry].split('-')
+      @year = @month_year[0]
+      @month = @month_year[1]
+      # Use the TrustCommerce test servers
+      ActiveMerchant::Billing::Base.mode = :test
+
+      gateway = ActiveMerchant::Billing::TrustCommerceGateway.new(
+        :login => 'TestMerchant',
+        :password => 'password')
+
+      # ActiveMerchant accepts all amounts as Integer values in cents
+      amount = current_user.carts.last.total_price
+      print(amount)
+      # $10.00
+
+      # The card verification value is also known as CVV2, CVC2, or CID
+      credit_card = ActiveMerchant::Billing::CreditCard.new(
+        :first_name         => params[:info][:first_name],
+        :last_name          => params[:info][:last_name],
+        :number             => params[:info][:cardNumber],
+        :month              => @month,
+        :year               => @year,
+        :verification_value => params[:info][:cvv])
+
+      # Validating the card automatically detects the card type
+      if credit_card.validate.empty?
+        # Capture $10 from the credit card
+        response = gateway.purchase(amount, credit_card)
+
+        if response.success?
+          puts "Successfully charged $#{sprintf("%.2f", amount / 100)} to the credit card #{credit_card.display_number}"
+          puts response.inspect
+          byebug
+          Order.create(:customer_id => current_user.id, :cart_id => current_user.carts.last.id, :amount => amount, :address_id => @address_id, :transaction_id => response.params["transid"])
+          # redirect_to root_path, notice: "Order Successful"
+        else
+          raise StandardError, response.message
+          render addresses_path, alert: "Provided details are invalid..."
+        end
+      end
     end
   end
   # POST /addresses or /addresses.json
   def create
     @address = Address.new(address_params)
-
     respond_to do |format|
       if @address.save
         format.html { redirect_to addresses_path, notice: "Address was successfully created." }

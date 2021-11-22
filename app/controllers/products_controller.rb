@@ -21,6 +21,11 @@ class ProductsController < ApplicationController
   # GET /products/1 or /products/1.json
   def show
   end
+  def search
+    byebug
+    # keyword = "%" + params[:search].to_s + "%"
+    # @products = Product.find_by_sql("SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE ? OR PRODUCT_BRAND LIKE ?", keyword, keyword)
+  end
 
   # GET /products/new
   def new

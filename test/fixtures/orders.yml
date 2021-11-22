@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cart_id: 
+  customer_id: 
+  amount: 
+  address_id: 
+  transaction_id: MyString
+
+two:
+  cart_id: 
+  customer_id: 
+  amount: 
+  address_id: 
+  transaction_id: MyString

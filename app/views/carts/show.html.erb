@@ -28,7 +28,6 @@
       </div>
       <center>
         <% unless @cart.line_items.empty? %>
-<!--          <button >PROCEED TO CHECKOUT SCREEN</button>-->
         <%= link_to "PROCEED TO ADDRESS", addresses_path, class:"px-3 py-3 text-white w-half mt-3 rounded shadow font-bold hover:bg-purple-900", style:"background: #5575aa" %>
         <%end %>
           </center>

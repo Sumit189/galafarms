@@ -1,0 +1,62 @@
+<div class="card-body">
+  <div class="container">
+    <div class="sub-header">
+      <h2 class="title"><%= params[:type].nil? ? "Products" : params[:type].to_s.pluralize(@products.count) %><span><%= @products.count%> <%="result".pluralize(@products.count) %></span></h2>
+      <form class="form-inline">
+        <%= form_for(:search ,:url => {:action => :search}) do |form| %>
+        <div class="row">
+          <div class="col-sm-7">
+            <%= form.text_field :keyword,class:"form-control mr-sm-1",placeholder:"Search"  %>
+          </div>
+          <div class="col-sm-2">
+            <%= form.submit "Search", class:"btn btn-outline-success my-1 my-sm-0" %>
+        </div>
+          <%end %>
+        </div>
+      </form>
+
+
+    </div>
+
+    <div class="thumb-wrapper">
+      <% @products.each do |p| %>
+        <div class="thumb-unit">
+          <% if p.stock > 0 %>
+            <%= link_to "/show_product?id=#{p.id}" do %>
+              <div class="heading"><span>₹<%= p.price %></span><span><%= (p.stock > 0) ? "<b>Stock: #{p.stock}</b>".html_safe : "<p style='color:red'>Out of stock</p>".html_safe %></span></div>
+              <% if p.stock > 0 %>
+                <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);"></div>
+              <% else %>
+                <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);  filter: grayscale(100%); "></div>
+              <% end %>
+              <div class="info">
+                <p style="font-size: 22px"><%= p.product_name %></p><span class="icon"><i class="fa fa-shopping-cart"></i></span>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="heading"><span>₹<%= p.price %></span><span><%= (p.stock > 0) ? "<b>Stock: #{p.stock}</b>".html_safe : "<p style='color:red'>Out of stock</p>".html_safe %></span></div>
+            <% if p.stock > 0 %>
+              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);"></div>
+            <% else %>
+              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);  filter: grayscale(100%); "></div>
+            <% end %>
+            <div class="info">
+              <p style="font-size: 22px"><%= p.product_name %></p><span class="icon"><i class="fa fa-shopping-cart"></i></span>
+            </div>
+          <% end %>
+
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if @products.count>8 %>
+  <div class="card-footer">
+    <div class="d-flex">
+      <div class="mx-auto">
+        <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      </div>
+    </div>
+  </div>
+<%end %>

@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get '/show_product' => 'products#show_product'
   get '/addresses/order_info' => 'addresses#order_info'
   post '/addresses/order_info' => 'addresses#order_info'
+  get 'product/search' => 'products#search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

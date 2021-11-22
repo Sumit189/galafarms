@@ -34,7 +34,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/home/contactus"  id="contact">Contact us</a>
         </li>
-
       </ul>
       <div class="d-flex">
         <%= link_to Cart.exists?(session[:cart_id]) ? "<i class='fa fa-shopping-cart fa-lg' aria-hidden='true'></i> ₹#{Cart.find(session[:cart_id]).total_price}".html_safe : "<i class='fa fa-shopping-cart fa-lg' aria-hidden='true'></i>".html_safe, "/carts/#{session[:cart_id]}", class:"btn btn-outline-dark", style: "margin-right: 10px" %>

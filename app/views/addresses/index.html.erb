@@ -38,11 +38,18 @@
       <div class="card card-bg">
         <div class="card-body">
           <h3 class="text-xl mt-4 font-bold d-flex justify-content-between mb-2">Payment Details<span> <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-amex"></i> </span> </h3>
-          <div class="form-group"> <label for="username">
-            <h6>Card Owner</h6>
+          <div class="form-group"> <label for="firstname">
+            <h6>First Name</h6>
           </label>
-            <%= form.text_field :username, class:"form-control", placeholder:"Card Owner Name" %>
+            <%= form.text_field :first_name, class:"form-control", placeholder:"First Name" %>
           </div>
+
+          <div class="form-group"> <label for="lastname">
+            <h6>Last Name</h6>
+          </label>
+            <%= form.text_field :last_name, class:"form-control", placeholder:"Last Name" %>
+          </div>
+
           <div class="form-group">
             <label for="cardNumber">
               <h6>Card number</h6>
@@ -64,7 +71,8 @@
             <div class="col-sm-4">
               <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
                 <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-              </label> <input type="text" required class="form-control">
+              </label>
+                <%= form.number_field :cvv, required: true, class:"form-control" %>
               </div>
           </div>
             <div class="col-sm-7">

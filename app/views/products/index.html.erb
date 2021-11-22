@@ -22,52 +22,6 @@
         </button>
       </div>
       </center>
-  <div class="card-body">
-    <div class="container">
-      <div class="sub-header">
-        <h2 class="title"><%= params[:type].nil? ? "Products" : params[:type].to_s.pluralize(@products.count) %><span><%= @products.count%> <%="result".pluralize(@products.count) %></span></h2>
-<!--        <div class="close-btn"><i class="fa fa-close"></i></div>-->
-      </div>
-      <div class="thumb-wrapper">
-      <% @products.each do |p| %>
-        <div class="thumb-unit">
-          <% if p.stock > 0 %>
-          <%= link_to "/show_product?id=#{p.id}" do %>
-            <div class="heading"><span>₹<%= p.price %></span><span><%= (p.stock > 0) ? "<b>Stock: #{p.stock}</b>".html_safe : "<p style='color:red'>Out of stock</p>".html_safe %></span></div>
-            <% if p.stock > 0 %>
-          <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);"></div>
-              <% else %>
-              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);  filter: grayscale(100%); "></div>
-              <% end %>
-          <div class="info">
-            <p style="font-size: 22px"><%= p.product_name %></p><span class="icon"><i class="fa fa-shopping-cart"></i></span>
-          </div>
-          <% end %>
-          <% else %>
-            <div class="heading"><span>₹<%= p.price %></span><span><%= (p.stock > 0) ? "<b>Stock: #{p.stock}</b>".html_safe : "<p style='color:red'>Out of stock</p>".html_safe %></span></div>
-            <% if p.stock > 0 %>
-              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);"></div>
-            <% else %>
-              <div class="box" style=" background-image: url(<%= rails_blob_url(p.image) %>);  filter: grayscale(100%); "></div>
-            <% end %>
-            <div class="info">
-              <p style="font-size: 22px"><%= p.product_name %></p><span class="icon"><i class="fa fa-shopping-cart"></i></span>
-            </div>
-        <% end %>
+    <%= render 'gallery' %>
 
-        </div>
-
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <% if @products.count>8 %>
-  <div class="card-footer">
-    <div class="d-flex">
-      <div class="mx-auto">
-        <%= will_paginate @products, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-      </div>
-    </div>
-  </div>
-  <%end %>
 </div>
